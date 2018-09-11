@@ -11,6 +11,7 @@ Usage:
 [--log-file=<log>] \
 [--out-file=<log>] \
 [--backup-threads=<threads>] \
+[--no-service-stop] \
 [--uncompressed-archives]
     pyxtrabackup-restore (-h | --help)
     pyxtrabackup --version
@@ -41,6 +42,8 @@ Options:
     Output file [default: /var/log/mysql/xtrabackup.out].
     --backup-threads=<threads>                  \
     Threads count [default: 1].
+    --no-service-stop                           \
+    Don't stop mysqld service during restore process.
     --uncompressed-archives                     \
     Specify that the backup archives are not compressed. \
 Use this option if you did backup with --no-compress.
@@ -57,6 +60,7 @@ def main():
     restore_tool = RestorationTool(arguments['--log-file'],
                                    arguments['--out-file'],
                                    arguments['--data-dir'],
+                                   arguments['--no-service-stop'],
                                    arguments['--uncompressed-archives'])
     try:
         restore_tool.start_restoration(arguments['--base-archive'],

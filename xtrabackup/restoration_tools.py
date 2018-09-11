@@ -8,12 +8,13 @@ import logging
 
 class RestorationTool:
 
-    def __init__(self, log_file, output_file, data_dir, uncompressed_archives):
+    def __init__(self, log_file, output_file, data_dir, no_service_stop, uncompressed_archives):
         self.log_manager = log_manager.LogManager()
         self.data_dir = data_dir
         self.stop_watch = timer.Timer()
         self.setup_logging(log_file)
         self.command_executor = CommandExecutor(output_file)
+        self.service_stop = not no_service_stop
         self.compressed_archives = not uncompressed_archives
 
     def setup_logging(self, log_file):
@@ -26,14 +27,15 @@ class RestorationTool:
         self.logger.debug("Temporary workdir: " + self.workdir)
 
     def stop_service(self):
-        try:
-            self.command_executor.exec_manage_service('mysql', 'stop')
-        except:
-            self.logger.error(
-                'Unable to manage MySQL service.',
-                exc_info=True)
-            self.clean()
-            raise
+        if self.service_stop:
+            try:
+                self.command_executor.exec_manage_service('mysql', 'stop')
+            except:
+                self.logger.error(
+                    'Unable to manage MySQL service.',
+                    exc_info=True)
+                self.clean()
+                raise
 
     def clean_data_dir(self):
         try:

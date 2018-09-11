@@ -60,6 +60,7 @@ You can also specify the following options:
 * --out-file: Log file for innobackupex output (default: */var/log/mysql/xtrabackup.out*).
 * --backup-threads: You can specify more threads in order to backup quicker (default: 1).
 * --no-compress: Do not compress the backup archive.
+* --no-service-stop: Don't stop mysqld service during restore process.
 * --webhook: URL to send a POST request after the backup is finished. Will send the *archive_path* and *archive_repository* in JSON.
 
 Restoration
