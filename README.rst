@@ -60,7 +60,6 @@ You can also specify the following options:
 * --out-file: Log file for innobackupex output (default: */var/log/mysql/xtrabackup.out*).
 * --backup-threads: You can specify more threads in order to backup quicker (default: 1).
 * --no-compress: Do not compress the backup archive.
-* --no-service-stop: Don't stop mysqld service during restore process.
 * --webhook: URL to send a POST request after the backup is finished. Will send the *archive_path* and *archive_repository* in JSON.
 
 Restoration
@@ -121,6 +120,7 @@ You can also specify the following options:
 * --log-file: Log file for the script (default: */var/log/mysql/pyxtrabackup-inc.log*).
 * --out-file: Log file for innobackupex output (default: */var/log/mysql/xtrabackup.out*).
 * --backup-threads: You can specify more threads in order to backup quicker (default: 1).
+* --no-service-stop: Don't stop mysqld service during restore process.
 * --no-compress: Do not compress the backup archives.
 
 
@@ -130,7 +130,7 @@ Restoration
 *WARNING*: The folder structure and the file names created by the *pyxtrabackup-inc* binary needs to be respected in order to restore successfully:
 
  *  TIMESTAMP_FOLDER/INC/base_backup_DATETIME.tar(.gz)
- *  TIMESTAMP_FOLDER/INC/inc_1_backup_DATETIME.tar(.gz)
+ *  TIMESTAMP_FOLDER/INC/inc_0_backup_DATETIME.tar(.gz)
  *  TIMESTAMP_FOLDER/INC/inc_N_backup_DATETIME.tar(.gz)
 
 To restore an incremental backup, you'll need to use the *pyxtrabackup-restore* binary the following way: ::
@@ -147,7 +147,7 @@ For example, using the following parameters: ::
 
 $ pyxtrabackup-restore --base-archive=/tmp/repo/20140518/INC/base_backup_20140518_1700.tar.gz --incremental-archive=/tmp/repo/20140518/INC/inc_backup_5_20140518_2200.gz --user=backup-user
 
-The script will restore the inc_N_backup_DATETIME.tar.gz from 1 to 5.
+The script will restore the inc_N_backup_DATETIME.tar.gz from 0 to 5.
 
 Additional options
 ^^^^^^^^^^^^^^^^^^
