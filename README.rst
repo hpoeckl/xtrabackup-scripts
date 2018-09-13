@@ -120,7 +120,6 @@ You can also specify the following options:
 * --log-file: Log file for the script (default: */var/log/mysql/pyxtrabackup-inc.log*).
 * --out-file: Log file for innobackupex output (default: */var/log/mysql/xtrabackup.out*).
 * --backup-threads: You can specify more threads in order to backup quicker (default: 1).
-* --no-service-stop: Don't stop mysqld service during restore process.
 * --no-compress: Do not compress the backup archives.
 
 
@@ -160,6 +159,7 @@ You can also specify the following options:
 * --log-file: Log file for the script (default: */var/log/mysql/pyxtrabackup-restore.log*).
 * --out-file: Log file for innobackupex output (default: */var/log/mysql/xtrabackup.out*).
 * --backup-threads: You can specify more threads in order to backup quicker (default: 1).
+* --no-service-stop: Don't stop mysqld service during restore process.
 * --uncompressed-archives: Do not try to uncompress backup archives. Use this option if you used the backup tool with --no-compress.
 
 
