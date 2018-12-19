@@ -45,12 +45,17 @@ class CommandExecutor:
         self.exec_command(command)
 
     def exec_backup_preparation(self, backup_directory, redo_logs):
-        command = [
-            'innobackupex',
-            '--apply-log',
-            backup_directory]
         if redo_logs:
-            command.append('--redo-only')
+            command = [
+                'innobackupex',
+                '--apply-log',
+                '--redo-only',
+                backup_directory]
+        else:
+            command = [
+                'innobackupex',
+                '--apply-log',
+                backup_directory]
         self.exec_command(command)
 
     def exec_incremental_preparation(self, backup_directory,
